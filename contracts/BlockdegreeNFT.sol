@@ -921,12 +921,12 @@ contract ECOINNFT is ERC721Token, Ownable {
   // TokenId to TokenMetadata
   mapping(uint256 => TokenMetadata) public tokenMetadata;
 
-  constructor (string memory name_, string memory symbol_) ERC721Token(name_, symbol_) public {
+  constructor (string name_, string symbol_) ERC721Token(name_, symbol_) public {
   }
   /**  
     User Funtionality Starts
    */
-  function mint(string memory name, string memory description, string memory _tokenURI) onlyOwner public {
+  function mint(string name, string description, string _tokenURI) onlyOwner public {
      uint256 tokenId = allTokens.length.add(1);
      address to = msg.sender;
     _mint(to, tokenId);
