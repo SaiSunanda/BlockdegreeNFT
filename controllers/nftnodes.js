@@ -1,6 +1,6 @@
 
 const Web3 = require('web3');
-
+require('dotenv').config({path:'/Users/apple/Desktop/universal/blockdegree-marketplace/.env'});
 
 const contractabi= require('../contractabi/contractabi.json')
 const finalcontract= require('../build/contracts/ECOINNFT.json')
@@ -10,12 +10,13 @@ const finalcontractabi=finalcontract.abi;
 const contractaddress='0xF704279195B08bc973C955Fc9B6F7514A26e9508'
 
 const address ='0xd9494bac9b7daf8cf468c68efaf95f3965e90987'
-const privatekey ="2039c4b651fab88ffff9248266806683fedc1ef8700f52d82215b6f315e266f3"
+const privatekey = "";    //give the private Key of this account
+console.log(privatekey);
 
 //add your address and private key to start making transactions
 const address2 ='0x6e196df2129195a8743691c98aa4bd1e9b3e45f1';
-const account2privatekey2 ='11a7178d8bb973fb993b0c4b6b3847f8de829598c7d509da3798e879247146f8';
-
+const account2privatekey2 = "";     //give the priate key of this account
+console.log(account2privatekey2)
 //add your second address and private key to start making transactions
 //testnet url for sample deployment and testing our functions
 const xdcurl='https://rpc.apothem.network'
@@ -61,48 +62,6 @@ const token={
           return res.status(500).json({msg: err.message})
       }
     },
-
-    //will transfer NFT tokens to another account
-    transfernft: async (req, res) => {
-        console.log("check2");
-        const {to,tokenId}=req.body;
-        console.log(to);
-        try {
-            const web3= new Web3(xdcurl);
-            const networkId = await web3.eth.net.getId();
-            const tetherToken = await new web3.eth.Contract(
-            finalcontractabi,
-            contractaddress
-             );
-            const tx = await tetherToken.methods.transfer(to,tokenId).call();
-            return res.status(200).json({msg:tx})
-        } catch (err) {
-            return res.status(500).json({msg: err.message})
-        }
-    },
-
-    setTokenURI: async (req, res) => {
-        console.log("check3");
-        const {tokenId,_tokenURI}=req.body;
-        console.log(to);
-        try {
-            const web3= new Web3(xdcurl);
-            const networkId = await web3.eth.net.getId();
-            const tetherToken = await new web3.eth.Contract(
-            finalcontractabi,
-            contractaddress
-             );
-            const tx = await tetherToken.methods.setTokenURI(tokenId,_tokenURI).call();
-            return res.status(200).json({msg:tx})
-   } catch (err) {
-            return res.status(500).json({msg: err.message})
-    }
-},
-
-
-
-
-
 
 }  
 
